@@ -1,0 +1,2 @@
+pip install streamlit   # and any other libs you use
+pip freeze > requirements.txt
