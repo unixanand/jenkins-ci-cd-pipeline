@@ -39,7 +39,7 @@ pipeline {
         stage('Start Streamlit App') {
             steps {
                 sh '''
-                nohup $VENV_DIR/bin/streamlit run /app/demo.py --server.port $PORT --server.address 0.0.0.0 > /app/app.log 2>&1 &
+                nohup $VENV_DIR/bin/streamlit run /app/demo.py --server.port $PORT --server.address 0.0.0.0 > /home/ec2-user/app/app.log 2>&1 &
                 '''
             }
         }
