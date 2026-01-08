@@ -23,7 +23,7 @@ pipeline {
                 sh '''
                 python3 -m venv $VENV_DIR
                 $VENV_DIR/bin/pip install --upgrade pip
-                $VENV_DIR/bin/pip install -r /app/requirements.txt
+                $VENV_DIR/bin/pip install -r /home/ec2-user/app/requirements.txt
                 '''
             }
         }
