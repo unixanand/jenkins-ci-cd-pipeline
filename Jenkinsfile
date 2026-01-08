@@ -31,10 +31,13 @@ pipeline {
         stage('Stop Old App') {
             steps {
                 sh '''
-                pkill -f streamlit || true
+                set +e
+                pgrep -f streamlit && pkill -f streamlit || true
+                echo "Old process cleanup done"
                 '''
             }
         }
+
 
         stage('Start Streamlit App') {
             steps {
