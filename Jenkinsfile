@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        APP_DIR = "/app"
-        VENV_DIR = "/app/venv"
+        APP_DIR = "/home/ec2-user/app"
+        VENV_DIR = "/home/ec2-user/app/venv"
         PORT = "8501"
     }
 
