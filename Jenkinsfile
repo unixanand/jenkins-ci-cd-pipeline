@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_DIR = "/app"
+        VENV_DIR = "/app/venv"
+        PORT = "8501"
+    }
+
+    stages {
+
+        stage('Clone Repo') {
+            steps {
+                sh '''
+                rm -rf /app/*
+                git clone https://github.com/unixanand/jenkins-ci-cd-pipeline.git /app
+                '''
+            }
+        }
+
+        stage('Setup Python Environment') {
+            steps {
+                sh '''
+                python3 -m venv $VENV_DIR
+                $VENV_DIR/bin/pip install --upgrade pip
+                $VENV_DIR/bin/pip install -r /app/requirements.txt
+                '''
+            }
+        }
+
+        stage('Stop Old App') {
+            steps {
+                sh '''
+                pkill -f streamlit || true
+                '''
+            }
+        }
+
+        stage('Start Streamlit App') {
+            steps {
+                sh '''
+                nohup $VENV_DIR/bin/streamlit run /app/demo.py --server.port $PORT --server.address 0.0.0.0 > /app/app.log 2>&1 &
+                '''
+            }
+        }
+    }
+}
