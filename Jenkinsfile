@@ -42,7 +42,7 @@ pipeline {
         stage('Start Streamlit App') {
             steps {
                 sh '''
-                sudo -u ec2-user setsid streamlit run /home/ec2-user/app/demo.py --server.port $PORT --server.address 0.0.0.0 > /home/ec2-user/app/app.log 2>&1 &
+                sudo -u ec2-user setsid /home/ec2-user/app/venv/bin/streamlit run /home/ec2-user/app/demo.py  --server.address 0.0.0.0  --server.port 8501  > /home/ec2-user/app/app.log 2>&1 < /dev/null &
                 '''
             }
         }
