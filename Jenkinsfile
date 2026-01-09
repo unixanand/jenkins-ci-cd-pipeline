@@ -12,7 +12,8 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 sh '''
-                rm -rf /home/ec2-user/app/*
+                sudo rm -rf /home/ec2-user/app/*
+                sudo rm -rf /home/ec2-user/app/.git
                 git clone https://github.com/unixanand/jenkins-ci-cd-pipeline.git /home/ec2-user/app
                 '''
             }
